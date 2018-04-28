@@ -91,6 +91,8 @@ def chromeLoad() :
         #driver = webdriver.Chrome()  # Optional argument, if not specified will search path.
         driver = webdriver.Chrome('C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')  # Optional argument, if not specified will search path.
         driver.get('http://www.google.com/xhtml');
+        print("ok")
+        return
         time.sleep(5) # Let the user actually see something!
         search_box = driver.find_element_by_name('q')
         search_box.send_keys('ChromeDriver')
@@ -120,9 +122,9 @@ def weiboLoad() :
 
 if __name__=="__main__":
     print("main")
-    screenCapture()
+    #screenCapture()
     #brandCapture()
     #amazonLoad()
-    #chromeLoad()
+    chromeLoad()
     #weiboLoad()
     print("exit")
