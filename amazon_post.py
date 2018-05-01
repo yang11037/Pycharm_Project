@@ -3,32 +3,15 @@
 
 import xlrd
 import xlwt
-from bs4 import BeautifulSoup
 import re
 import random
 from http_helper import HttpHelper
+import csv
 from mongo_helper import MongoHelper
 
 ROOT_URL = "http://trackglucose.com"
 
-
-def createPost(pd):
-    url = ROOT_URL + "/wp-content/plugins/post-api/insert_post.php?token=P@ssw0rd&dummy=" + str(random.random())
-    req = {
-        'post_title': pd['title'],
-        'excerpt': pd['inner_des'],
-        'categories': "blood glucose meter",
-        '_regular_price': pd['price']
-    }
-    errorCode, rsp = HttpHelper.post(url, req)
-    if errorCode == 'OK' and 'errorCode' in rsp and rsp['errorCode'] == 'OK':
-        print(rsp['ID'])
-        return rsp['ID']
-    else:
-        return None
-
-
-def createAllPost():
+def Mongo2Csv():
     doc = []
     try:
         pdCollection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "bloodglucosemeter")
@@ -67,5 +50,5 @@ def createAllPost():
 
 if __name__ == "__main__":
     print("main")
-    createAllPost()
+    Mongo2Csv()
     print("exit")

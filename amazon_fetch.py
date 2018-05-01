@@ -5,9 +5,12 @@ import xlrd
 import xlwt
 from http_helper import HttpHelper
 from bs4 import BeautifulSoup
+import csv
 import re
 from mongo_helper import MongoHelper
 from selenium import webdriver
+import time
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 def amazonfetch():
@@ -181,7 +184,67 @@ def amazonfetch_detail():
         total += 1
 
 
+def test_chromedriver():
+    try:
+        driver = webdriver.Chrome('C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')
+        driver.get("https://www.amazon.com/Diabetes-Testing-Glucose-Lancets-Lancing/dp/B0"
+                   "1HF5L98E/ref=sr_1_2_sspa?ie=UTF8&qid=1525005047&sr=8-2-spons&keywords=Blood%2Bglucose%2Bmeter&th=1")
+        time.sleep(5)
+        '''input = driver.find_elements_by_css_selector("#a-autoid-9 > span > input")
+        total = 1
+        for i in input:
+            ActionChains(driver).move_to_element(i).double_click(i).perform()
+            if total == 6:
+                break
+            total += 1
+        time.sleep(5)'''
+
+        html = driver.page_source.encode('utf-8')
+        driver.close()
+        soup = BeautifulSoup(html, "lxml")
+        with open("./product.csv", "a+", newline='',encoding="utf-8") as c:
+            writer = csv.writer(c, dialect='excel')
+            list = soup.find_all("div", attrs={"class": "imgTagWrapper"})
+
+            img = ""
+            for i in list:
+                imge = i.find_all("img")
+                for j in imge:
+                    img = j['src']
+                #img += imge['src'] + ","
+            #img = img[0:-1]
+            sdes = ""
+            text1 = soup.find_all("div", attrs={"id":"fbExpandableSectionContent"})
+            for j in text1:
+                sdes = j
+            des = ""
+            text2 = soup.find_all("div", attrs={"id": "productDescription_feature_div"})
+            for i in text2:
+                des = i
+            title = ""
+            text3 = soup.find_all("span", attrs={"id": "productTitle"})
+            for i in text3:
+                title = i.text
+            title = title.encode("utf-8").decode()
+            title = title.strip()
+            sdes = sdes.encode("utf-8").decode()
+            sdes = sdes.strip()
+            des = des.encode("utf-8").decode()
+            des = des.strip()
+            img = img.encode("utf-8").decode()
+            img = img.strip()
+            writer.writerow(['', 'simple', '', title, '1', '0', 'visible', sdes, des, '', '', 'taxable', '', '1',
+                             '', '0', '0', '', '', '', '', '1', '', '', '39', 'blood glucose meter', '', '', img, '', '',
+                             '', '', '', '', '', '', '0'])
+            c.close()
+
+    except Exception as err:
+        print(err)
+
+
+
 if __name__ == "__main__":
-    #amazonfetch()
-    amazonfetch_detail()
+    # amazonfetch()
+    # amazonfetch_detail()
+    test_chromedriver()
     print("exit")
