@@ -23,7 +23,7 @@ class HttpHelper:
             html = None
             if statusCode == 200 or statusCode == 201:
                 if rsp.apparent_encoding != None:
-                    html = rsp.content.decode(rsp.apparent_encoding)
+                    html = rsp.content.decode("utf-8")
                 else:
                     html = rsp.content.decode(encoding)
                         

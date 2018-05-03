@@ -16,9 +16,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 def amazonfetch():
     total = 1
     goods = 1
-    url = "https://www.amazon.com/s/ref=sr_pg_2?rh=i%3Aaps%2Ck%3ABlood+glucose+meter&" \
-          "page=1&keywords=Blood+glucose+meter&ie=UTF8&qid=1524802633"
-    collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "bloodglucosemeter")
+    url = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Damazon-devices&field-keywords=vibrating" \
+          "+massager&lo=none"
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "vibratingmsg")
 
     '''excel = xlwt.Workbook()
     sheet = excel.add_sheet("Blood glucose meter")
@@ -47,7 +47,7 @@ def amazonfetch():
             if flag != []:
                 continue
             #print("flagok")
-            a = li.find_all("a", attrs={"class":re.compile("^a-link-normal s-access-detail-page.*")})
+            a = li.find_all("a", attrs={"class": re.compile("^a-link-normal s-access-detail-page.*")})
             if a == []:
                 continue
             #print("aok")
@@ -59,14 +59,14 @@ def amazonfetch():
             #print("brandok")
             brand = ""
             for i in branddiv:
-                span = i.find_all("span", attrs={"class":"a-size-small a-color-secondary"})
+                span = i.find_all("span", attrs={"class": "a-size-small a-color-secondary"})
                 if span == []:
                     continue
                 #print("spanok")
                 for j in span:
                     brand += j.text
             brand = brand[3:]
-            p = li.find_all("span", attrs={"class":"sx-price-whole"})
+            p = li.find_all("span", attrs={"class": "sx-price-whole"})
             if p == []:
                 continue
             for i in p:
@@ -141,7 +141,7 @@ def amazonfetch_detail():
     doclist = []
     doc = []
     total = 1
-    collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "bloodglucosemeter")
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "vibratingmsg")
 
     while True:
         slist = collection.nextPage(100)
@@ -154,19 +154,15 @@ def amazonfetch_detail():
         if x['state'] != "fetched":
             continue
 
-        '''driver = webdriver.PhantomJS(r"D:\Anaconda\pkgs\phantomjs-2.1.1-0\Library\bin\phantomjs.exe")
-                driver.get(i['url'])
-                print(driver.current_url)
-                driver.quit()
-                return'''
+
         try:
             status, html = HttpHelper.fetch(x['url'])
-            soup = BeautifulSoup(html)
+            soup = BeautifulSoup(html, "lxml")
             title = soup.find_all("span", attrs={"id": "productTitle"})
             for i in title:
                 text = i.text
                 title = text.strip()
-            a = soup.find_all("a", attrs={"id": "bylineInfo"})
+            a = soup.find_all("a", attrs={"id": "brand"})  # bylineInfo brand
             for i in a:
                 href = i['href']
                 if re.match("^/{1}.*", href):
@@ -186,65 +182,109 @@ def amazonfetch_detail():
 
 def test_chromedriver():
     try:
-        driver = webdriver.Chrome('C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')
-        driver.get("https://www.amazon.com/Diabetes-Testing-Glucose-Lancets-Lancing/dp/B0"
-                   "1HF5L98E/ref=sr_1_2_sspa?ie=UTF8&qid=1525005047&sr=8-2-spons&keywords=Blood%2Bglucose%2Bmeter&th=1")
-        time.sleep(5)
-        '''input = driver.find_elements_by_css_selector("#a-autoid-9 > span > input")
         total = 1
-        for i in input:
-            ActionChains(driver).move_to_element(i).double_click(i).perform()
-            if total == 6:
+        doclist = []
+        doc = []
+        collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "mistinhaler")
+        while True:
+            slist = collection.nextPage(100)
+            if slist == None or len(slist) == 0:
                 break
+            for i in slist:
+                doclist.append(i)
+
+        for page in doclist:
+            print(total)
             total += 1
-        time.sleep(5)'''
+            if page['state'] != 'pass':
+                continue
 
-        html = driver.page_source.encode('utf-8')
-        driver.close()
-        soup = BeautifulSoup(html, "lxml")
-        with open("./product.csv", "a+", newline='',encoding="utf-8") as c:
-            writer = csv.writer(c, dialect='excel')
-            list = soup.find_all("div", attrs={"class": "imgTagWrapper"})
+            driver = webdriver.Chrome('C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')
+            driver.get(page['url'])
+            print("wait for u")
 
-            img = ""
-            for i in list:
-                imge = i.find_all("img")
-                for j in imge:
-                    img = j['src']
-                #img += imge['src'] + ","
-            #img = img[0:-1]
-            sdes = ""
-            text1 = soup.find_all("div", attrs={"id":"fbExpandableSectionContent"})
-            for j in text1:
-                sdes = j
-            des = ""
-            text2 = soup.find_all("div", attrs={"id": "productDescription_feature_div"})
-            for i in text2:
-                des = i
-            title = ""
-            text3 = soup.find_all("span", attrs={"id": "productTitle"})
-            for i in text3:
-                title = i.text
-            title = title.encode("utf-8").decode()
-            title = title.strip()
-            sdes = sdes.encode("utf-8").decode()
-            sdes = sdes.strip()
-            des = des.encode("utf-8").decode()
-            des = des.strip()
-            img = img.encode("utf-8").decode()
-            img = img.strip()
-            writer.writerow(['', 'simple', '', title, '1', '0', 'visible', sdes, des, '', '', 'taxable', '', '1',
-                             '', '0', '0', '', '', '', '', '1', '', '', '39', 'blood glucose meter', '', '', img, '', '',
-                             '', '', '', '', '', '', '0'])
+            size = driver.find_elements_by_tag_name("img")
+            for i in size:
+                if i.location['x'] == 19 or i.location['x'] == 71:
+                    if i.size == {'height': 40, 'width': 40}:
+                        ActionChains(driver).move_to_element(i).click(i).perform()
+
+            html = driver.page_source.encode('utf-8')
+            driver.close()
+            soup = BeautifulSoup(html, "lxml")
+            with open("./product.csv", "a+", newline='', encoding="utf-8") as c:
+                writer = csv.writer(c, dialect='excel')
+                list = soup.find_all("div", attrs={"class": "imgTagWrapper"})
+
+                img = ""
+                for i in list:
+                    imge = i.find_all("img")
+                    for j in imge:
+                        img = img + j['src'] + ","
+                img = img[0:-1]
+
+                price = ""
+                pricetxt = soup.find_all("span", attrs={"id": "priceblock_ourprice"})
+                for i in pricetxt:
+                    price = i.text
+                    price = price.strip()
+
+                des = ""
+                text2 = soup.find_all("div", attrs={"id": "productDescription"})
+                '''div,class:aplus-v2 desktop celwidget  
+                   div id: productDescription
+                '''
+                for i in text2:
+                    des = i
+                des = des.encode("utf-8").decode()
+                des = des.strip()
+                des_html = "<div class=\"productdescription\">" + des +"</div>"
+
+                img = img.encode("utf-8").decode()
+                img = img.strip()
+
+                sdes = page['inner_des']
+                sdes = "<div class = \"short-des\">" + "<a href = \"" + page['brand_a'] + "\">" + \
+                       "<font size=1 color=blue>" + page['brand'] + "</font></a><br>About the product<br>"\
+                       + sdes + "</div>"
+
+                writer.writerow(['', 'simple', '', page['title'], '1', '0', 'visible', sdes, des_html, '', '',
+                                 'taxable', '', '1', '', '0', '0', '', '', '', '', '1', '', '', price,
+                                 'blood glucose meter', '', '', img, '', '', '', '', '', '', '', '', '0'])
+                print("csv ok")
+
+                doc.append({"_id": page['_id'], "brand": page['brand'], "url": page['url'], "state": "posted",
+                            "price": price, "title": page['title'], "brand_a": page['brand_a'],
+                            "inner_des": page['inner_des'], "product_des": des})
+                collection.updateOne(doc)
+                doc.clear()
+                print("mongo ok")
             c.close()
 
     except Exception as err:
         print(err)
 
-
+def test():
+    try:
+        driver = webdriver.Chrome('C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')
+        driver.get("https://www.amazon.com/KINGDOMCARES-Moisturizing-Blackheads-Humidifier-Hydration/dp/B01M0HBUXR/ref"
+                   "=sr_1_49_sspa/132-1314774-3806241?ie=UTF8&qid=1525248585&sr=8-49-spons&keywords=mist%2Binhaler&th=1")
+        time.sleep(5)
+        html = driver.page_source.encode('utf-8')
+        driver.close()
+        soup = BeautifulSoup(html)
+        list = soup.find_all("span", attrs={"id":"priceblock_ourprice"})
+        price = ""
+        for i in list:
+            price = i.text
+            price = price.strip()
+        print(price)
+    except Exception as err:
+        print(err)
 
 if __name__ == "__main__":
     # amazonfetch()
-    # amazonfetch_detail()
-    test_chromedriver()
+    amazonfetch_detail()
+    # test_chromedriver()
+    # test()
     print("exit")

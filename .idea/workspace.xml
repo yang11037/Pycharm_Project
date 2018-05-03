@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac463f54-d4c4-4bde-ae65-3690c9f38898" name="Default" comment="for job  labor vocation">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Pycharm Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Pycharm Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_webdriver.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_webdriver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amazon_fetch.py" beforeDir="false" afterPath="$PROJECT_DIR$/amazon_fetch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/http_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/http_helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/product.csv" beforeDir="false" afterPath="$PROJECT_DIR$/product.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,18 +20,18 @@
     <SUITE FILE_PATH="coverage/Pycharm_Project$drugs_com.coverage" NAME="drugs.com Coverage Results" MODIFIED="1524109696541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pycharm_Project$test_webdriver.coverage" NAME="test_webdriver Coverage Results" MODIFIED="1524910636410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pycharm_Project$test_mongo_helper.coverage" NAME="test_mongo_helper Coverage Results" MODIFIED="1523865412606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Pycharm_Project$amazon_fetch.coverage" NAME="amazon_fetch Coverage Results" MODIFIED="1524909710131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pycharm_Project$amazon_fetch.coverage" NAME="amazon_fetch Coverage Results" MODIFIED="1525339530953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pycharm_Project$nlp_helper.coverage" NAME="nlp_helper Coverage Results" MODIFIED="1524031893693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pycharm_Project$test.coverage" NAME="test Coverage Results" MODIFIED="1524109606912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pycharm_Project$test_beautiful_soup.coverage" NAME="test_beautiful_soup Coverage Results" MODIFIED="1523869347756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Medline_fetch.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Medline_fetch.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Medline_fetch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+            <state relative-caret-position="23">
+              <caret line="61" column="13" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
               <folding>
                 <element signature="e#46#77#0" expanded="true" />
                 <element signature="e#269#962#0" />
@@ -40,13 +40,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="amazon_fetch.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="amazon_fetch.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/amazon_fetch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="144" column="44" lean-forward="true" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="44" />
+            <state relative-caret-position="368">
+              <caret line="285" column="19" lean-forward="true" selection-start-line="285" selection-start-column="19" selection-end-line="285" selection-end-column="19" />
               <folding>
-                <element signature="e#46#57#0" expanded="true" />
+                <element signature="e#5885#8994#0" />
+                <element signature="e#9012#10503#0" />
               </folding>
             </state>
           </provider>
@@ -55,11 +56,8 @@
       <file leaf-file-name="amazon_post.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/amazon_post.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="51" column="47" lean-forward="true" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
-              <folding>
-                <element signature="e#46#57#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="644">
+              <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -67,7 +65,7 @@
       <file leaf-file-name="drugs.com.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/drugs.com.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1403">
+            <state relative-caret-position="1219">
               <caret line="61" column="47" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
               <folding>
                 <element signature="e#15#28#0" expanded="true" />
@@ -79,8 +77,8 @@
       <file leaf-file-name="http_helper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/http_helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1863">
-              <caret line="81" column="22" selection-start-line="81" selection-start-column="22" selection-end-line="81" selection-end-column="22" />
+            <state relative-caret-position="184">
+              <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
               <folding>
                 <element signature="e#15#30#0" expanded="true" />
               </folding>
@@ -91,7 +89,7 @@
       <file leaf-file-name="nlp_helper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nlp_helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
+            <state relative-caret-position="161">
               <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
               <folding>
                 <element signature="e#16#25#0" expanded="true" />
@@ -103,7 +101,7 @@
       <file leaf-file-name="mongo_helper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mongo_helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
+            <state relative-caret-position="1426">
               <caret line="62" column="75" selection-start-line="62" selection-start-column="75" selection-end-line="62" selection-end-column="75" />
             </state>
           </provider>
@@ -112,7 +110,7 @@
       <file leaf-file-name="test_beautiful_soup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_beautiful_soup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
+            <state relative-caret-position="575">
               <caret line="28" selection-start-line="28" selection-end-line="28" />
               <folding>
                 <element signature="e#16#29#0" expanded="true" />
@@ -133,8 +131,8 @@
       <file leaf-file-name="test_webdriver.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_webdriver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+            <state relative-caret-position="2277">
+              <caret line="104" column="17" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
               </folding>
@@ -160,12 +158,12 @@
         <option value="$PROJECT_DIR$/test_mongo_helper.py" />
         <option value="$PROJECT_DIR$/mongo_helper.py" />
         <option value="$PROJECT_DIR$/nlp_helper.py" />
-        <option value="$PROJECT_DIR$/http_helper.py" />
         <option value="$PROJECT_DIR$/drugs.com.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/amazon_fetch.py" />
         <option value="$PROJECT_DIR$/amazon_post.py" />
         <option value="$PROJECT_DIR$/test_webdriver.py" />
+        <option value="$PROJECT_DIR$/http_helper.py" />
+        <option value="$PROJECT_DIR$/amazon_fetch.py" />
       </list>
     </option>
   </component>
@@ -190,7 +188,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -202,6 +199,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -221,7 +219,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test_webdriver">
+  <component name="RunManager" selected="Python.amazon_fetch">
     <configuration name="amazon_fetch" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Pycharm Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -326,9 +324,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.amazon_fetch" />
         <item itemvalue="Python.test_webdriver" />
         <item itemvalue="Python.amazon_post" />
-        <item itemvalue="Python.amazon_fetch" />
         <item itemvalue="Python.drugs.com" />
         <item itemvalue="Python.test" />
       </list>
@@ -365,22 +363,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.07782516" side_tool="true" weight="0.8464052" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.9221748" visible="true" weight="0.3565976" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32897604" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15138593" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.9221748" visible="true" weight="0.3565976" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32824427" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15618336" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39978212" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991276" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -409,7 +408,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="9" />
+      <option name="time" value="17" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -795,7 +794,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nlp_helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
+        <state relative-caret-position="161">
           <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
           <folding>
             <element signature="e#16#25#0" expanded="true" />
@@ -805,7 +804,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/drugs.com.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1403">
+        <state relative-caret-position="1219">
           <caret line="61" column="47" selection-start-line="61" selection-start-column="47" selection-end-line="61" selection-end-column="47" />
           <folding>
             <element signature="e#15#28#0" expanded="true" />
@@ -813,26 +812,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/http_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1863">
-          <caret line="81" column="22" selection-start-line="81" selection-start-column="22" selection-end-line="81" selection-end-column="22" />
-          <folding>
-            <element signature="e#15#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mongo_helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
+        <state relative-caret-position="1426">
           <caret line="62" column="75" selection-start-line="62" selection-start-column="75" selection-end-line="62" selection-end-column="75" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_beautiful_soup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
+        <state relative-caret-position="575">
           <caret line="28" selection-start-line="28" selection-end-line="28" />
           <folding>
             <element signature="e#16#29#0" expanded="true" />
@@ -849,8 +838,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_webdriver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="104" column="17" lean-forward="true" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+        <state relative-caret-position="2277">
+          <caret line="104" column="17" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
           </folding>
@@ -859,31 +848,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/amazon_post.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="51" column="47" lean-forward="true" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
-          <folding>
-            <element signature="e#46#57#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="644">
+          <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/amazon_fetch.py">
+    <entry file="file://$PROJECT_DIR$/http_helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="144" column="44" lean-forward="true" selection-start-line="144" selection-start-column="44" selection-end-line="144" selection-end-column="44" />
+        <state relative-caret-position="184">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
           <folding>
-            <element signature="e#46#57#0" expanded="true" />
+            <element signature="e#15#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Medline_fetch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+        <state relative-caret-position="23">
+          <caret line="61" column="13" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
           <folding>
             <element signature="e#46#77#0" expanded="true" />
             <element signature="e#269#962#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/amazon_fetch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="285" column="19" lean-forward="true" selection-start-line="285" selection-start-column="19" selection-end-line="285" selection-end-column="19" />
+          <folding>
+            <element signature="e#5885#8994#0" />
+            <element signature="e#9012#10503#0" />
           </folding>
         </state>
       </provider>
