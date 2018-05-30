@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import xlrd
-import xlwt
-import re
-import random
-from http_helper import HttpHelper
-import csv
-from mongo_helper import MongoHelper
+from Utils.mongo_helper import MongoHelper
 
 ROOT_URL = "http://trackglucose.com"
 

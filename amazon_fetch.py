@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import xlrd
-import xlwt
-from http_helper import HttpHelper
+from Utils.http_helper import HttpHelper
 from bs4 import BeautifulSoup
 import csv
 import re
-from mongo_helper import MongoHelper
+from Utils.mongo_helper import MongoHelper
 from selenium import webdriver
 import time
 from selenium.webdriver.common.action_chains import ActionChains
@@ -16,9 +14,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 def amazonfetch():
     total = 1
     goods = 1
-    url = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Damazon-devices&field-keywords=vibrating" \
-          "+massager&lo=none"
-    collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "vibratingmsg")
+    url = "https://www.amazon.com/s/ref=sr_as_oo?rh=i%3Aaps%2Ck%3Ablood+pressure+monitor&keywords=blood+pressure+mon" \
+          "itor&ie=UTF8&qid=1527130301"
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "bloodglucosemeter")
 
     '''excel = xlwt.Workbook()
     sheet = excel.add_sheet("Blood glucose meter")
@@ -45,6 +43,7 @@ def amazonfetch():
             goods += 1
             flag = li.find_all("p",attrs={"class":"acs-mn2-midwidgetHeader"})
             if flag != []:
+                print(flag)
                 continue
             #print("flagok")
             a = li.find_all("a", attrs={"class": re.compile("^a-link-normal s-access-detail-page.*")})
@@ -141,7 +140,7 @@ def amazonfetch_detail():
     doclist = []
     doc = []
     total = 1
-    collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "vibratingmsg")
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "bloodglucosemeter")
 
     while True:
         slist = collection.nextPage(100)
@@ -162,14 +161,14 @@ def amazonfetch_detail():
             for i in title:
                 text = i.text
                 title = text.strip()
-            a = soup.find_all("a", attrs={"id": "brand"})  # bylineInfo brand
+            a = soup.find_all("a", attrs={"id": "bylineInfo"})  # bylineInfo brand
             for i in a:
                 href = i['href']
                 if re.match("^/{1}.*", href):
                     href = "http://www.amazon.com" + href
             description = soup.find_all("ul", attrs={"class": "a-unordered-list a-vertical a-spacing-none"})
             for i in description:
-                doc.append({"_id": x['_id'], "brand": x['brand'], "url": x['url'], "state": "pass", "price":x['price']
+                doc.append({"_id": x['_id'], "brand": x['brand'], "url": x['url'], "state": "pass", "price": x['price']
                             , "title": title, "brand_a": href, "inner_des": str(i)})
             collection.updateOne(doc)
             doc.clear()
@@ -185,7 +184,7 @@ def test_chromedriver():
         total = 1
         doclist = []
         doc = []
-        collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "mistinhaler")
+        collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "bloodglucosemeter")
         while True:
             slist = collection.nextPage(100)
             if slist == None or len(slist) == 0:
@@ -284,7 +283,7 @@ def test():
 
 if __name__ == "__main__":
     # amazonfetch()
-    amazonfetch_detail()
-    # test_chromedriver()
+    # amazonfetch_detail()
+    test_chromedriver()
     # test()
     print("exit")

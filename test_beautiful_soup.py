@@ -1,9 +1,7 @@
 # coding=utf-8
 
-import string
-import time
 from bs4 import BeautifulSoup
-from http_helper import HttpHelper
+from Utils.http_helper import HttpHelper
  
 def testSoup():
     url = "https://www.drugs.com/comments/abobotulinumtoxina/"

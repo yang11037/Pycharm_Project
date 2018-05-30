@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from pymongo import MongoClient
-from http_helper import HttpHelper
-from mongo_helper import MongoHelper
+from Utils.http_helper import HttpHelper
+from Utils.mongo_helper import MongoHelper
 from bs4 import BeautifulSoup
 import re
-from nlp_helper import NLPHelper
+from Utils.nlp_helper import NLPHelper
 
 '''
 此方法是第一天作为实践爬取链接并存库所用

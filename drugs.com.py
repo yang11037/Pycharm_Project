@@ -1,13 +1,8 @@
 # coding=utf-8
-import string
-import time
-import hashlib
-import os
-import re
 import random
-from http_helper import HttpHelper
-from mongo_helper import MongoHelper
-from nlp_helper import NLPHelper
+from Utils.http_helper import HttpHelper
+from Utils.mongo_helper import MongoHelper
+
 #from file_helper import FileHelper
 
 HTQ_ROOT_URL = "http://htq.dev.chn.gbl"

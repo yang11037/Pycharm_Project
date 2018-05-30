@@ -7,7 +7,7 @@ import json
 class HttpHelper:
     
     def __init__(self):
-        print("completed")
+        pass
     
     @staticmethod
     def fetch(url, encoding = "utf-8", headers = None):
@@ -41,7 +41,7 @@ class HttpHelper:
             
             m = hashlib.md5()
             m.update(url.encode("utf-8"))
-            fileName = m.hexdigest() + ".html"                    
+            fileName = m.hexdigest() + ".html"
             prefix = fileName[0:1]
             filePath = rootPath + "\\" + prefix
             if not os.path.exists(filePath):

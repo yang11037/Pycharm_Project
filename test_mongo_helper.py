@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding=utf-8
 
-from mongo_helper import MongoHelper
+from Utils.mongo_helper import MongoHelper
 
 MONGO_HOST = "172.16.40.140"
 MONGO_DATABASE_NAME = "ZDBBingCom"
