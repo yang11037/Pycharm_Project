@@ -5,10 +5,11 @@
 from Utils.mongo_helper import MongoHelper
 from blog import parseBlog
 from Utils.crypt_helper import CryptHelper
+from Utils.url_helper import UrlHelper
 
 
 def test1():
-    collection = MongoHelper("172.16.40.140", 27017, "ZDBThevergeCom", "pages")
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBTechradarCom", "pages")
     doclist = []
     doc = []
     while True:
@@ -29,7 +30,7 @@ def test1():
             if article['state'] != "fetched":
                 continue
             prefix = article['filename'][0:1]
-            filepath = "D:/pages/theverge.com/" + prefix + "/" + article['filename']
+            filepath = "D:/pages/techradar.com/" + prefix + "/" + article['filename']
             with open(filepath, encoding="utf-8") as fp:
                 html = fp.read()
                 p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12 = parseBlog(html)
@@ -38,13 +39,15 @@ def test1():
                     writer.writerow([p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12])
                 f.close()'''
                 md5 = CryptHelper.getMD5Hash(article['url'])
+                key = UrlHelper.getHostPath(article['url'])[1]
                 doc.append({"_id": article['_id'],
                             "filename": article['filename'],
                             "url": article['url'],
                             "state": "pass",
                             "domain": article['domain'],
                             "md5": md5,
-                            "blog": {"category": "Electronics",
+                            "key": key,
+                            "blog": {"category": "Automobiles - Article",
                                      "found": p1,
                                      "titleContent": p2,
                                      "descriptionContent":p3,
@@ -68,7 +71,23 @@ def test1():
         print(i['blog'])'''
 
 
+def test2():
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBDigitaltrendsCom", "pages")
+    doclist = []
+    newlist = []
+    while True:
+        slist = collection.nextPage(10)
+        if len(slist) == 0:
+            break
+
+        for article in slist:
+            blog = article['blog']
+            article['state'] = "pass"
+            newlist.append(article)
+            collection.updateOne(newlist)
+            newlist.clear()
 
 
 if __name__ == "__main__":
-    test1()
+    # test1()
+    test2()

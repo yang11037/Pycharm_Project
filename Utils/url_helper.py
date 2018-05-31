@@ -3,12 +3,11 @@
 from urllib.parse import urljoin
 from urllib.parse import urlparse
 
-from log_helper import LogHelper
 
 class UrlHelper:
     
     def __init__(self):
-        LogHelper.log("created")
+        pass
     
     @staticmethod
     def relative2abs(baseUrl, relativeUrl):
@@ -23,7 +22,7 @@ class UrlHelper:
     @staticmethod
     def getHostPath(url):
         result = urlparse(url)
-        print (result)
+        # print (result)
         return [result[1], result[2]]
     
 if __name__=="__main__":

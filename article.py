@@ -6,13 +6,12 @@ from Utils.http_helper import HttpHelper
 from Utils.mongo_helper import MongoHelper
 
 MONGO_HOST = "172.16.40.140"
-MONGO_DATABASE_NAME = "ZDBBlog"
-IMPORT_URL = "http://localhost:54691/DataImport/Article"
-IMPORT_URL = "https://www.popular123.com/DataImport/Article"
+MONGO_DATABASE_NAME = "ZDBTechradarCom"
+IMPORT_URL = "http://popular123.dev.chn.gbl/DataImport/Article"
 
 def importAllArticle():
     try: 
-        articleCollection = MongoHelper(MONGO_HOST, 27017, MONGO_DATABASE_NAME, 'article')
+        articleCollection = MongoHelper(MONGO_HOST, 27017, MONGO_DATABASE_NAME, 'pages')
         total = 0
         while True:
             articleList = articleCollection.nextPage(10)
@@ -20,32 +19,41 @@ def importAllArticle():
                 break
 
             total += len(articleList)
-            print ("total=" + str(total))
+            print("total=" + str(total))
             newArticleList = []
             for article in articleList:
+                if article['state'] != "pass":
+                    continue
                 #print (str(article['_id']))
                 blog = article['blog']
+                excerpt = blog['descriptionContent'] if blog['descriptionContent'] else blog['summary']
                 doc = {
-                    'id': blog['md5'],
-                    'title': article['titleContent'],
-                    'excerpt': article['excerpt'],
-                    'content': article['content'],
-                    'author': article['author'],
+                    'id': article['md5'],
+                    'title': blog['titleContent'],
+                    'excerpt': excerpt,
+                    'content': "",
+                    'author': article['domain'],
                     'domain': article['domain'],
-                    'categories': article['categories'],
-                    'tags': article['tags'],
+                    'categories': blog['category'],
+                    'tags': "",
                     'url': article['url'],
-                    'status': article['status'],
+                    'status': "0",
                     'key': article['key'],
                 }
                 newArticleList.append(doc)
                 
-            errorCode, rsp = HttpHelper.post(IMPORT_URL, newArticleList)
-            if errorCode == "OK" and rsp != None and 'isOk' in rsp and rsp['isOk'] == True:
-                print ("import article list ok")
-            else:
-                print ("import article list error")
-                
+                errorCode, rsp = HttpHelper.post(IMPORT_URL, newArticleList)
+                if errorCode == "OK" and rsp != None and 'isOk' in rsp and rsp['isOk'] == True:
+                    print ("import article ok")
+                else:
+                    print ("import article error")
+                newArticleList.clear()
+                article['state'] = "sended"
+                newArticleList.append(article)
+                articleCollection.updateOne(newArticleList)
+                newArticleList.clear()
+
+
     except Exception as err :
         print(err)
     finally:
@@ -90,7 +98,7 @@ def updateAllArticle():
         print ("exit")    
     
 if __name__=="__main__":
-    print("main")
+    '''print("main")
     print (sys.argv)
     if sys.argv[1] == "import":
         importAllArticle()
@@ -98,4 +106,5 @@ if __name__=="__main__":
         updateAllArticle()
     else:
         print ("usage python article.py [import|update]")
-    print("exit")
+    print("exit")'''
+    importAllArticle()

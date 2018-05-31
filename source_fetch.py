@@ -4,6 +4,7 @@
 from Utils.http_helper import HttpHelper
 from bs4 import BeautifulSoup
 from Utils.mongo_helper import MongoHelper
+import re
 
 
 def fetch_dx():
@@ -175,9 +176,98 @@ def fetch_theverge():
     collection.insertMany(doc)
 
 
+def fetch_digitaltrends():
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBDigitaltrendsCom", "pages")
+    entrance = "https://www.digitaltrends.com/tv-reviews/"
+    doclist = []
+    total = 1
+    while total < 120 and entrance is not None:
+        html = HttpHelper.fetch(entrance)
+        soup = BeautifulSoup(html[1], "lxml")
+
+        div = soup.find("div", attrs={"class": "m-products"})
+        item = div.find_all("div", attrs={"class": "item"})
+        for i in item:
+            try:
+                h3 = i.find("h3", attrs={"class": "title"})
+                url = h3.find("a")['href']
+                filename = HttpHelper.fetchAndSave(url, "utf-8", "D:/pages/digitaltrends.com")
+                doclist.append({"filename": filename, "url": url, "state": "fetched", "domain": "www.digitaltrends.com"})
+                print(total)
+                total += 1
+            except Exception as err:
+                print(err)
+
+        a = soup.find_all("a", attrs={"class": "next page-numbers"})
+        if a is None:
+            entrance = None
+            continue
+        next = a[-1]
+        entrance = next['href']
+    if doclist != []:
+        collection.insertMany(doclist)
+
+
+def fetch_cnet():
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBCnetCom", "pages")
+    entrance = "https://www.cnet.com/topics/tablets/products/"
+    doclist = []
+    total = 1
+    while total < 80 and entrance is not None:
+        html = HttpHelper.fetch(entrance)
+        soup = BeautifulSoup(html[1], "lxml")
+
+        section1 = soup.find("section", attrs={"id": "dfllResults"})
+        section2 = section1.find_all("section", attrs={"class": "col-3 searchItem product "})
+        for i in section2:
+            try:
+                a = i.find("a", attrs={"class": "imageWrap"})
+                url = "https://www.cnet.com" + a['href']
+                filename = HttpHelper.fetchAndSave(url, "utf-8", "D:/pages/cnet.com")
+                doclist.append({"filename": filename, "url": url, "state": "fetched", "domain": "www.cnet.com"})
+                print(total)
+                total += 1
+            except Exception as err:
+                print(err)
+
+        a = soup.find_all("a", attrs={"class": "next"})
+        if a is None:
+            entrance = None
+            continue
+        next = a[-1]
+        entrance = "https://www.cnet.com" + next['href']
+    if doclist != []:
+        collection.insertMany(doclist)
+
+
+def fetch_techradar():
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBTechradarCom", "pages")
+    entrance = "https://www.techradar.com/reviews/car-tech?"
+    doclist = []
+    total = 1
+    html = HttpHelper.fetch(entrance)
+    soup = BeautifulSoup(html[1], "lxml")
+
+    div = soup.find("div", attrs={"class": "listingResults"})
+    divitem = div.find_all("div", attrs={"class": re.compile("^listingResult small result*")})
+    for i in divitem:
+        try:
+            a = i.find("a")
+            url = a['href']
+            filename = HttpHelper.fetchAndSave(url, "utf-8", "D:/pages/techradar.com")
+            doclist.append({"filename": filename, "url": url, "state": "fetched", "domain": "www.techradar.com"})
+            print(total)
+            total += 1
+        except Exception as err:
+            print(err)
+    collection.insertMany(doclist)
+
 if __name__ == "__main__":
     # fetch_dx()
     # fetch_banggood()
     # fetch_tomtop()
     # fetch_gearbest()
-    fetch_theverge()
+    # fetch_theverge()
+    # fetch_digitaltrends()
+    # fetch_cnet()
+    fetch_techradar()
