@@ -138,7 +138,6 @@ def amazonfetch():
 
 def amazonfetch_detail():
     doclist = []
-    doc = []
     total = 1
     collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "bloodglucosemeter")
 
@@ -168,8 +167,8 @@ def amazonfetch_detail():
                     href = "http://www.amazon.com" + href
             description = soup.find_all("ul", attrs={"class": "a-unordered-list a-vertical a-spacing-none"})
             for i in description:
-                doc.append({"_id": x['_id'], "brand": x['brand'], "url": x['url'], "state": "pass", "price": x['price']
-                            , "title": title, "brand_a": href, "inner_des": str(i)})
+                doc = {"_id": x['_id'], "brand": x['brand'], "url": x['url'], "state": "pass", "price": x['price']
+                            , "title": title, "brand_a": href, "inner_des": str(i)}
             collection.updateOne(doc)
             doc.clear()
         except Exception as err:
@@ -183,7 +182,6 @@ def test_chromedriver():
     try:
         total = 1
         doclist = []
-        doc = []
         collection = MongoHelper("172.16.40.140", 27017, "ZDBTestCom", "bloodglucosemeter")
         while True:
             slist = collection.nextPage(100)
@@ -252,9 +250,9 @@ def test_chromedriver():
                                  'blood glucose meter', '', '', img, '', '', '', '', '', '', '', '', '0'])
                 print("csv ok")
 
-                doc.append({"_id": page['_id'], "brand": page['brand'], "url": page['url'], "state": "posted",
+                doc = {"_id": page['_id'], "brand": page['brand'], "url": page['url'], "state": "posted",
                             "price": price, "title": page['title'], "brand_a": page['brand_a'],
-                            "inner_des": page['inner_des'], "product_des": des})
+                            "inner_des": page['inner_des'], "product_des": des}
                 collection.updateOne(doc)
                 doc.clear()
                 print("mongo ok")

@@ -27,7 +27,6 @@ def createPost(pd):
         return None 
     
 def createAllPost():
-    doc = []
     try:
         pdCollection = MongoHelper("172.16.40.140", 27017, "ZDBMedlineplusOrg", "supplement_copy")
         
@@ -43,13 +42,13 @@ def createAllPost():
                 
                 newID = createPost(pd)
                 if newID != None:
-                    doc.append({"_id": pd['_id'], "ID":newID, "cat": pd['cat'], "fileName": pd['fileName'],
+                    doc = {"_id": pd['_id'], "ID":newID, "cat": pd['cat'], "fileName": pd['fileName'],
                                 "url": pd['url'],
                                  "host": pd['host'],
                                  "state": "posted", "title": pd['title'], "content": pd['content'],
                                  "description": pd['description'],
-                                 "attrlist": pd['attrlist'], "contenthtml": pd['contenthtml']})
-                    print(doc[0]['ID'])
+                                 "attrlist": pd['attrlist'], "contenthtml": pd['contenthtml']}
+                    print(doc['ID'])
                     pdCollection.updateOne(doc)
                     doc.clear()
                     print ("create post ok")

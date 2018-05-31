@@ -59,6 +59,6 @@ class MongoHelper:
         self.collection.delete_one({'_id', doc['_id']})
         
     def updateOne(self, doc):
-        theId = doc[0]['_id']
-        return self.collection.find_one_and_replace({'_id': theId}, doc[0])
+        theId = doc['_id']
+        return self.collection.find_one_and_replace({'_id': theId}, doc)
         

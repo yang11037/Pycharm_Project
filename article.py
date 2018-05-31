@@ -5,11 +5,8 @@ from datetime import datetime
 from Utils.http_helper import HttpHelper
 from Utils.mongo_helper import MongoHelper
 
-MONGO_HOST = "172.16.40.140"
-MONGO_DATABASE_NAME = "ZDBTechradarCom"
-IMPORT_URL = "http://popular123.dev.chn.gbl/DataImport/Article"
 
-def importAllArticle():
+def importAllArticle(MONGO_HOST, MONGO_DATABASE_NAME, IMPORT_URL):
     try: 
         articleCollection = MongoHelper(MONGO_HOST, 27017, MONGO_DATABASE_NAME, 'pages')
         total = 0
@@ -25,19 +22,17 @@ def importAllArticle():
                 if article['state'] != "pass":
                     continue
                 #print (str(article['_id']))
-                blog = article['blog']
-                excerpt = blog['descriptionContent'] if blog['descriptionContent'] else blog['summary']
                 doc = {
                     'id': article['md5'],
-                    'title': blog['titleContent'],
-                    'excerpt': excerpt,
+                    'title': article['title'],
+                    'excerpt': article['excerpt'],
                     'content': "",
                     'author': article['domain'],
                     'domain': article['domain'],
-                    'categories': blog['category'],
-                    'tags': "",
+                    'categories': article['categories'],
+                    'tags': article['tags'],
                     'url': article['url'],
-                    'status': "0",
+                    'status': article['status'],
                     'key': article['key'],
                 }
                 newArticleList.append(doc)
@@ -49,9 +44,7 @@ def importAllArticle():
                     print ("import article error")
                 newArticleList.clear()
                 article['state'] = "sended"
-                newArticleList.append(article)
-                articleCollection.updateOne(newArticleList)
-                newArticleList.clear()
+                articleCollection.updateOne(article)
 
 
     except Exception as err :
@@ -59,7 +52,8 @@ def importAllArticle():
     finally:
         print ("exit")    
 
-def updateAllArticle():
+
+def updateAllArticle(MONGO_HOST, MONGO_DATABASE_NAME, IMPORT_URL):
     try: 
         articleCollection = MongoHelper(MONGO_HOST, 27017, MONGO_DATABASE_NAME, 'article')
         total = 0
@@ -96,9 +90,10 @@ def updateAllArticle():
         print(err)
     finally:
         print ("exit")    
-    
-if __name__=="__main__":
-    '''print("main")
+
+
+if __name__ == "__main__":
+    print("main")
     print (sys.argv)
     if sys.argv[1] == "import":
         importAllArticle()
@@ -106,5 +101,4 @@ if __name__=="__main__":
         updateAllArticle()
     else:
         print ("usage python article.py [import|update]")
-    print("exit")'''
-    importAllArticle()
+    print("exit")

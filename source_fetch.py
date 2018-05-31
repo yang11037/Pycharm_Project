@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-
+# -*- coding=uft-8 -*-
 
 from Utils.http_helper import HttpHelper
 from bs4 import BeautifulSoup
 from Utils.mongo_helper import MongoHelper
 import re
 
-
+# 商品
 def fetch_dx():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBDxCom", "pages")
     entrance = "http://www.dx.com/c/computer-office-399/networking-314"
@@ -43,6 +43,8 @@ def fetch_dx():
     if doc != []:
         collection.insertMany(doc)
 
+
+# 商品
 def fetch_banggood():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBBgoodCom", "pages")
     entrance = "https://www.banggood.com/Wholesale-Indoor-Lighting-c-2514.html"
@@ -80,6 +82,8 @@ def fetch_banggood():
     if doc != []:
         collection.insertMany(doc)
 
+
+# 商品
 def fetch_tomtop():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBTomtopCom2", "pages")
     entrance = "https://www.tomtop.com/vehicle-infotainment-11035/"
@@ -117,6 +121,8 @@ def fetch_tomtop():
     if doc != []:
         collection.insertMany(doc)
 
+
+# 商品
 def fetch_gearbest():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBGearbestCom", "pages")
     entrance = "https://www.gearbest.com/health-care-c_11689/"
@@ -154,6 +160,7 @@ def fetch_gearbest():
         collection.insertMany(doc)
 
 
+# 文章
 def fetch_theverge():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBThevergeCom", "pages")
     url = "https://www.theverge.com/camera-review"
@@ -176,6 +183,7 @@ def fetch_theverge():
     collection.insertMany(doc)
 
 
+# 文章
 def fetch_digitaltrends():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBDigitaltrendsCom", "pages")
     entrance = "https://www.digitaltrends.com/tv-reviews/"
@@ -208,6 +216,7 @@ def fetch_digitaltrends():
         collection.insertMany(doclist)
 
 
+# 文章
 def fetch_cnet():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBCnetCom", "pages")
     entrance = "https://www.cnet.com/topics/tablets/products/"
@@ -240,6 +249,7 @@ def fetch_cnet():
         collection.insertMany(doclist)
 
 
+# 文章
 def fetch_techradar():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBTechradarCom", "pages")
     entrance = "https://www.techradar.com/reviews/car-tech?"
@@ -261,6 +271,7 @@ def fetch_techradar():
         except Exception as err:
             print(err)
     collection.insertMany(doclist)
+
 
 if __name__ == "__main__":
     # fetch_dx()

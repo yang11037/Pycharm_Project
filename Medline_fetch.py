@@ -49,7 +49,6 @@ def test2():
     nlp = NLPHelper()
     doclist = []
     doc = []  # doc作为新key：attrlist的
-    doc2 = []
     while True:
         slist = collection.nextPage(100)
         if slist == None or len(slist) == 0:
@@ -89,9 +88,9 @@ def test2():
             '''
             加入要覆盖当前collection的doc
             '''
-            doc2.append({"_id": i['_id'], "cat": i['cat'], "fileName": i['fileName'], "url": i['url'], "host": i['host'],
+            doc2 = {"_id": i['_id'], "cat": i['cat'], "fileName": i['fileName'], "url": i['url'], "host": i['host'],
                         "state": "completed", "title": i['title'], "content": content, "description": description,
-                         "attrlist": doc})
+                         "attrlist": doc}
             collection.updateOne(doc2)
             doc.clear()
             doc2.clear()   # 每完成一次更新将两个doc清空
@@ -121,9 +120,9 @@ def test2():
                 titlearr.clear()
             #print(content)
             description = nlp.getSummary(content, wordCount=20)
-            doc2.append({"_id": i['_id'], "cat": i['cat'], "fileName": i['fileName'], "url": i['url'], "host": i['host'],
+            doc2 = {"_id": i['_id'], "cat": i['cat'], "fileName": i['fileName'], "url": i['url'], "host": i['host'],
                         "state": "completed", "title": i['title'], "content": content, "description":description,
-                         "attrlist": doc})
+                         "attrlist": doc}
             collection.updateOne(doc2)
             doc.clear()
             doc2.clear()
@@ -140,7 +139,6 @@ def test2():
 def test3():
     collection = MongoHelper("172.16.40.140", 27017, "ZDBMedlineplusOrg", "supplement_copy", "url")
     doclist = []
-    doc = []
     total = 0
 
     while True:
@@ -160,9 +158,9 @@ def test3():
                            + '<div class="div-content>'+ j['innerhtml'] + '</div><br/>'
             contenthtml += contenthtml1
 
-        doc.append({"_id": i['_id'], "cat": i['cat'], "fileName": i['fileName'], "url": i['url'], "host": i['host'],
+        doc = {"_id": i['_id'], "cat": i['cat'], "fileName": i['fileName'], "url": i['url'], "host": i['host'],
                      "state": "built", "title": i['title'], "content": i['content'], "description": i['description'],
-                     "attrlist": i['attrlist'], "contenthtml": contenthtml})
+                     "attrlist": i['attrlist'], "contenthtml": contenthtml}
 
         collection.updateOne(doc)
         doc.clear()

@@ -2,6 +2,8 @@
 # -*- coding:utf-8 -*-
 
 from Utils.mongo_helper import MongoHelper
+import random
+from Utils.http_helper import HttpHelper
 
 ROOT_URL = "http://trackglucose.com"
 
