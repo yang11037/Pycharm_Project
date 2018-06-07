@@ -8,7 +8,7 @@ from crawler_dynamic_robot import sendPage
 
 DOMAIN = "D:/pages/gearbest.com/"
 MONGO_HOST = "172.16.40.140"
-MONGO_DATABASE_NAME = "ZDBTechradarCom"
+MONGO_DATABASE_NAME = "ZDBGearbestCom"
 
 
 # 将采集到本地的html上传（商品）

@@ -11,6 +11,7 @@ import time
 from selenium.webdriver.common.action_chains import ActionChains
 
 
+'''提取合适的详情页'''
 def amazonfetch():
     total = 1
     goods = 1
@@ -136,6 +137,7 @@ def amazonfetch():
     collection.insertMany(doc)
 
 
+'''抓取一些细节'''
 def amazonfetch_detail():
     doclist = []
     total = 1
@@ -178,6 +180,7 @@ def amazonfetch_detail():
         total += 1
 
 
+'''用webdriver渲染动态页面并生成csv文件'''
 def test_chromedriver():
     try:
         total = 1
@@ -261,27 +264,10 @@ def test_chromedriver():
     except Exception as err:
         print(err)
 
-def test():
-    try:
-        driver = webdriver.Chrome('C:/Program Files (x86)/Google/Chrome/Application/chromedriver.exe')
-        driver.get("https://www.amazon.com/KINGDOMCARES-Moisturizing-Blackheads-Humidifier-Hydration/dp/B01M0HBUXR/ref"
-                   "=sr_1_49_sspa/132-1314774-3806241?ie=UTF8&qid=1525248585&sr=8-49-spons&keywords=mist%2Binhaler&th=1")
-        time.sleep(5)
-        html = driver.page_source.encode('utf-8')
-        driver.close()
-        soup = BeautifulSoup(html)
-        list = soup.find_all("span", attrs={"id":"priceblock_ourprice"})
-        price = ""
-        for i in list:
-            price = i.text
-            price = price.strip()
-        print(price)
-    except Exception as err:
-        print(err)
+
 
 if __name__ == "__main__":
     # amazonfetch()
     # amazonfetch_detail()
     test_chromedriver()
-    # test()
     print("exit")

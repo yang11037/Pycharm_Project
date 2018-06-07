@@ -72,22 +72,17 @@ def upload():
 
 '''此为对数据库中单个数据进行修改的代码，不必理会'''
 def test2():
-    collection = MongoHelper("172.16.40.140", 27017, "ZDBDigitaltrendsCom", "pages")
-    doclist = []
-    newlist = []
+    collection = MongoHelper("172.16.40.140", 27017, "ZDBGearbestCom", "pages")
     while True:
         slist = collection.nextPage(10)
         if len(slist) == 0:
             break
 
         for article in slist:
-            blog = article['blog']
-            article['state'] = "pass"
-            newlist.append(article)
-            collection.updateOne(newlist)
-            newlist.clear()
+            article['state'] = "fetched"
+            collection.updateOne(article)
 
 
 if __name__ == "__main__":
-    Resolve()
-    # test2()
+    # Resolve()
+    test2()
