@@ -3,6 +3,8 @@ import requests
 import hashlib
 import os
 import json
+import numpy as np
+
 
 class HttpHelper:
     
